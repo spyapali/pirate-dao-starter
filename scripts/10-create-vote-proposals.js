@@ -41,6 +41,44 @@ import { ethers } from "ethers";
         console.log(
             "✅ Successfully created proposal to purchase a ship for the DAO!"
         );
+
+    } catch (error) {
+        console.error("failed to create second proposal", error);
+    }
+    try {
+        // This is our governance contract.
+        const vote = await sdk.getContract("0x620477a2c469645EC7b89C0c08f8Ca8955d65780", "vote");
+
+        const token = await sdk.getContract("0x876F1526b481EE99c68D6a51141031446DF67e6F", "token");
+
+        const amount = 20_000;
+        const address = "0x62E700b8CC818997Cd885d0D5228906F65bc5104"
+
+        const description = "Should we purchase a ship for the DAO, and transfer ?" + amount + " $GOLD to the wallet address?: " + address;
+
+        const executions = [
+            {
+                // Again, we're sending ourselves 0 ETH. Just sending our own token.
+                nativeTokenValue: 0,
+                transactionData: token.encoder.encode(
+                    // We're doing a transfer from the treasury to our wallet.
+                    "transfer",
+                    [
+                        process.env.WALLET_ADDRESS,
+                        ethers.utils.parseUnits(amount.toString(), 18),
+                    ]
+                ),
+                toAddress: token.getAddress(),
+            },
+        ];
+
+        await vote.propose(description, executions);
+
+
+        console.log(
+            "✅ Successfully created proposal to purchase a ship for the DAO!"
+        );
+
     } catch (error) {
         console.error("failed to create second proposal", error);
     }

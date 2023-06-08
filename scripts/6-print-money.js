@@ -10,8 +10,8 @@ import sdk from "./1-initialize-sdk.js";
         await token.mint(amount);
         const totalSupply = await token.totalSupply();
 
-        // Print how many of our token's are out there now!
-        console.log("✅ There now is", totalSupply.displayValue, "$HOKAGE in circulation");
+        // Print how many of our tokens are out there now!
+        console.log("✅ There now is", totalSupply.displayValue, "$GOLD in circulation");
     } catch (error) {
         console.error("Failed to print money, error:", error);
     }

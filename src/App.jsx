@@ -61,7 +61,7 @@ const App = () => {
     const getAllProposals = async () => {
       try {
         const proposals = await vote.getAll();
-        setProposals(proposals.slice(1, proposals.length));
+        setProposals(proposals.slice(2, proposals.length));
         console.log("🌈 Proposals:", proposals);
       } catch (error) {
         console.error("failed to get proposals!", error);

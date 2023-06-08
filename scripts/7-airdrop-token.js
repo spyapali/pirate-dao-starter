@@ -14,7 +14,7 @@ import sdk from "./1-initialize-sdk.js";
             process.exit(0)
         }
 
-        // loop through all the addresses and send them some $HOKAGE!
+        // loop through all the addresses and send them a random amount of crypto!
         const airdropTargets = walletAddresses.map((address) => {
             // Pick a random # between 1000 and 2000
             const randomAmount = Math.floor(Math.random() * 901) + 100;
